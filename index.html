@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rufina&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Rufina', serif;
+      color: black;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center/cover;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-box input[type="text"] {
+      padding: 12px 20px;
+      width: 300px;
+      border: none;
+      border-radius: 10px;
+    }
+    .search-btn {
+      padding: 12px 20px;
+      background-color: #b10dc9;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .toggle-btns {
+      margin-top: 20px;
+      display: flex;
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    .toggle-btns button {
+      padding: 10px 20px;
+      border: none;
+      background: white;
+      cursor: pointer;
+    }
+    .toggle-btns .active {
+      background: linear-gradient(to right, #fce4ec, #b10dc9);
+      color: white;
+    }
+    .filters-page {
+      padding: 30px;
+    }
+    .filters h3 {
+      margin-bottom: 20px;
+    }
+    .filter-category {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .filter-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 10px 0;
+    }
+    .filter-options {
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .filter-options button {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 5px 15px;
+      cursor: pointer;
+    }
+    .show { display: flex; }
+  </style>
+</head>
+<body>
+  <!-- First Page: Search -->
+  <div class="search-container" id="searchPage">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Enter city like 'Chennai'...">
+      <button class="search-btn" onclick="goToResults()">🔍 Search</button>
+    </div>
+    <div class="toggle-btns">
+      <button id="resBtn" class="active" onclick="toggleType('res')">Residential</button>
+      <button id="comBtn" onclick="toggleType('com')">Commercial</button>
+    </div>
+  </div>
+
+  <!-- Second Page: Filters -->
+  <div class="filters-page" id="filtersPage" style="display:none">
+    <div class="filters">
+      <h3>Filters</h3>
+
+      <!-- Bedrooms -->
+      <div class="filter-category">
+        <div class="filter-header" onclick="toggleFilter(this)">
+          <span>🛏️ No. of Bedrooms</span>
+          <span>▼</span>
+        </div>
+        <div class="filter-options">
+          <button>1 BHK</button>
+          <button>2 BHK</button>
+          <button>3 BHK</button>
+          <button>4+ BHK</button>
+        </div>
+      </div>
+
+      <!-- Property Type -->
+      <div class="filter-category">
+        <div class="filter-header" onclick="toggleFilter(this)">
+          <span>🏢 Property Type</span>
+          <span>▼</span>
+        </div>
+        <div class="filter-options">
+          <button>Residential Apartments</button>
+          <button>Commercial Shop</button>
+          <button>Residential Villa</button>
+          <button>Residential Plots</button>
+          <button>Service Apartment</button>
+          <button>Office Space</button>
+          <button>Retail Spaces</button>
+          <button>Commercial Space</button>
+          <button>Independent Floors</button>
+          <button>Independent Houses</button>
+          <button>Row Houses</button>
+          <button>Town Houses</button>
+          <button>Apartments - Row Houses</button>
+          <button>Independent Floors and Plots</button>
+          <button>Apartments - Villas</button>
+          <button>Villa Plots</button>
+          <button>Retail Space & Studio Apartments</button>
+          <button>Penthouses</button>
+        </div>
+      </div>
+
+      <!-- Possession -->
+      <div class="filter-category">
+        <div class="filter-header" onclick="toggleFilter(this)">
+          <span>🗓️ Possession</span>
+          <span>▼</span>
+        </div>
+        <div class="filter-options">
+          <button>Immediate</button>
+          <button>Under Construction</button>
+          <button>Ready to Move</button>
+          <button>1 Year</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleType(type) {
+      document.getElementById('resBtn').classList.remove('active');
+      document.getElementById('comBtn').classList.remove('active');
+      if (type === 'res') document.getElementById('resBtn').classList.add('active');
+      else document.getElementById('comBtn').classList.add('active');
+    }
+
+    function goToResults() {
+      document.getElementById('searchPage').style.display = 'none';
+      document.getElementById('filtersPage').style.display = 'block';
+    }
+
+    function toggleFilter(header) {
+      const options = header.nextElementSibling;
+      options.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
